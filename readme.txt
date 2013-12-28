@@ -1,15 +1,19 @@
 ﻿SwProjectInterface - A workflow helper for SolidWorks. Integrates project’s part library with SolidWorks API.
 
+Requires .NET framework 3.5 or newer.
+
 USAGE: Unzip the files to the folder of your choice and run SwProjectInterface.exe
 
 CHANGELOG:
 
-0.0.3.0
+0.1.0.0 [WIP]
 =======
 - BUGFIX: Now reading user settings from previours program version if present are missing.
 - Added option to change the custom property value of existing files.
 - User will now be notified when new version is available online.
 - Cleaned up some SW api code
+- GUI is now a little more sane.
+- Added option to close open project and change the custom preperty name value without restarting the app.
 
 0.0.2.0
 =======

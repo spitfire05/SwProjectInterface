@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using SolidWorks.Interop.sldworks;
-using SolidWorks.Interop.swconst;
-using System.IO;
-using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.FileIO;
+using SolidWorks.Interop.sldworks;
+using SolidWorks.Interop.swconst;
 
 namespace SwProjectInterface
 {
@@ -204,10 +204,54 @@ namespace SwProjectInterface
             swDoc = ((ModelDoc2)(swApp.NewDocument(template, 0, 0, 0)));
             CustomPropertyManager swCustProp = swDoc.Extension.get_CustomPropertyManager("");
             swCustProp.Set(Settings.Default.propertyName, name);
-            //ModelView myModelView = ((ModelView)(swDoc.ActiveView));
-            //myModelView.FrameState = ((int)(swWindowState_e.swWindowMaximized));
             swDoc.Extension.SaveAs(Path.Combine(project.workDir, file), (int)swSaveAsVersion_e.swSaveAsCurrentVersion, (int)swSaveAsOptions_e.swSaveAsOptions_Silent, null, ref errors, ref warnings);
             swApp.OnIdleNotify -= new DSldWorksEvents_OnIdleNotifyEventHandler(_save);
+            updateDBForm();
+            return 0;
+        }
+
+        public void save_Uprofile()
+        {
+            swApp = (SldWorks)Activator.CreateInstance(Type.GetTypeFromProgID("SldWorks.Application"));
+            swApp.Visible = true;
+            swApp.OnIdleNotify += new DSldWorksEvents_OnIdleNotifyEventHandler(_save_Uprofile);
+        }
+
+        protected int _save_Uprofile()
+        {
+            ModelDoc2 swDoc;
+            int errors = 0;
+            int warnings = 0;
+            swDoc = ((ModelDoc2)(swApp.NewDocument(template, 0, 0, 0)));
+            CustomPropertyManager swCustProp = swDoc.Extension.get_CustomPropertyManager("");
+            swCustProp.Set(Settings.Default.propertyName, name);
+
+            // Create sketch
+            swDoc.SketchManager.InsertSketch(true);
+            // Draw the lines
+            SketchSegment line1, line2, line3;
+            line1 = (SketchSegment)(swDoc.SketchManager.CreateLine(-0.05, 0.0, 0.0, 0.05, 0.0, 0.0)); // horizontal
+            line2 = (SketchSegment)(swDoc.SketchManager.CreateLine(-0.05, 0.0, 0.0, -0.05, 0.05, 0.0)); // left
+            line3 = (SketchSegment)(swDoc.SketchManager.CreateLine(0.05, 0.0, 0.0, 0.05, 0.05, 0.0)); // right
+            // left and right line same length
+            line2.Select4(false, null);
+            line3.Select4(true, null);
+            swDoc.SketchAddConstraints("sgSAMELENGTH");
+            // line 1 center on datum origin
+            swDoc.Extension.SelectByID2("", swSelectType_e.swSelDATUMPOINTS.ToString(), 0.0, 0.0, 0.0, false, 0, null, 0);
+            line1.Select4(true, null);
+            swDoc.SketchAddConstraints("sgATMIDDLE");
+            // Add dimensions
+            line1.Select4(false, null);
+            swDoc.AddDimension2(0.0, -0.05, 0.0);
+            line2.Select4(false, null);
+            swDoc.AddDimension2(-0.06, 0.025, 0.0);
+            // Exit sketch
+            swDoc.ClearSelection2(true);
+            swDoc.SketchManager.InsertSketch(true);
+
+            swDoc.Extension.SaveAs(Path.Combine(project.workDir, file), (int)swSaveAsVersion_e.swSaveAsCurrentVersion, (int)swSaveAsOptions_e.swSaveAsOptions_Silent, null, ref errors, ref warnings);
+            swApp.OnIdleNotify -= new DSldWorksEvents_OnIdleNotifyEventHandler(_save_Uprofile);
             updateDBForm();
             return 0;
         }
@@ -215,7 +259,7 @@ namespace SwProjectInterface
         public int create()
         {
             file = prefix + fourDigit(number) + suffix + extension;
-            if (File.Exists(file))
+            if (File.Exists(Path.Combine(project.workDir, file)))
             {
                 return RET_FILE_EXISTS;
             }

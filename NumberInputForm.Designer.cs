@@ -163,6 +163,7 @@
             this.Name = "NumberInputForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Input part number and name";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.nameGroupBox.ResumeLayout(false);

@@ -13,7 +13,7 @@ namespace SwProjectInterface
         [STAThread]
         static void Main()
         {
-            UpdateChecker.start("http://swprojectinterface.sourceforge.net/update.xml");
+            UpdateChecker.start("http://spitfire05.github.io/SwProjectInterface/update.xml");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
