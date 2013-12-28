@@ -23,11 +23,13 @@ namespace SwProjectInterface
         {
             InitializeComponent();
 
+            fieldDelimiterTextBox.Text = Settings.Default.CSVImportDelimiter;
+
             BindingList<importField> fields;
             fields = new BindingList<importField>();
             fields.Add(new importField("None", importFieldValue.NONE));
             fields.Add(new importField("Prefix + Name + Suffix", importFieldValue.PREFIX_NUMBER_SUFFIX));
-            fields.Add(new importField("Name", importFieldValue.NAME));
+            fields.Add(new importField(Settings.Default.propertyName, importFieldValue.NAME));
             fields.Add(new importField("Prefix", importFieldValue.PREFIX));
             fields.Add(new importField("Suffix", importFieldValue.SUFFIX));
             fields.Add(new importField("Number", importFieldValue.NUMBER));
@@ -83,9 +85,14 @@ namespace SwProjectInterface
                     enableLowerGUI(false);
                     return;
                 }
-                enableLowerGUI();
                 used.Add((importFieldValue)cb.SelectedValue);
             }
+            if (!used.Contains(importFieldValue.PREFIX_NUMBER_SUFFIX) && !used.Contains(importFieldValue.NUMBER))
+            {
+                enableLowerGUI(false);
+                return;
+            }
+            enableLowerGUI();
         }
 
         private void validateNumericUpDownSelections()
@@ -160,7 +167,7 @@ namespace SwProjectInterface
                 // Enable rest of interface
                 dataGridView1.Enabled = true;
                 groupBox3.Enabled = true;
-                enableLowerGUI(true);
+                validateComboBoxSelections();
             }
         }
 
@@ -184,8 +191,7 @@ namespace SwProjectInterface
                     importFieldValue columnMapping;
                     if (mapping.TryGetValue(columnNo, out columnMapping))
                     {
-                        if (columnMapping == importFieldValue.NAME &&
-                            omitRowsWithoutNamesCheckBox.Checked &&
+                        if (omitRowsWithoutNamesCheckBox.Checked &&
                             column == "")
                         {
                             omit = true;
@@ -334,8 +340,13 @@ namespace SwProjectInterface
             }
             form.dbForm.update();
             form.dbForm.Show();
-            MessageBox.Show(String.Format("Imported {0} files.", dataGridView1.RowCount.ToString()), "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(String.Format("Imported {0} files.", project.countFiles().ToString()), "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
+        }
+
+        private void fieldDelimiterTextBox_TextChanged(object sender, EventArgs e)
+        {
+            Settings.Default.CSVImportDelimiter = fieldDelimiterTextBox.Text.Trim();
         }
     }
 }

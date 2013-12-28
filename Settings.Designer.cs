@@ -70,5 +70,17 @@ namespace SwProjectInterface {
                 this["UpgradeRequired"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(";")]
+        public string CSVImportDelimiter {
+            get {
+                return ((string)(this["CSVImportDelimiter"]));
+            }
+            set {
+                this["CSVImportDelimiter"] = value;
+            }
+        }
     }
 }

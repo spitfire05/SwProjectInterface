@@ -37,6 +37,11 @@ namespace SwProjectInterface
             _openedOK = true;
         }
 
+        public int countFiles()
+        {
+            return files.Count;
+        }
+
         public void save()
         {
             XmlTextWriter textWriter = new XmlTextWriter(file, null);

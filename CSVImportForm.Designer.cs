@@ -35,6 +35,7 @@
             this.importButton = new System.Windows.Forms.Button();
             this.firstRowNamesCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.columnNumericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -73,6 +74,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Enabled = false;
             this.dataGridView1.Location = new System.Drawing.Point(10, 19);
@@ -98,6 +101,7 @@
             this.fieldDelimiterTextBox.Size = new System.Drawing.Size(100, 20);
             this.fieldDelimiterTextBox.TabIndex = 0;
             this.fieldDelimiterTextBox.Text = ";";
+            this.fieldDelimiterTextBox.TextChanged += new System.EventHandler(this.fieldDelimiterTextBox_TextChanged);
             // 
             // importButton
             // 
@@ -121,6 +125,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.columnNumericUpDown5);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label12);
@@ -144,14 +149,23 @@
             this.groupBox3.Enabled = false;
             this.groupBox3.Location = new System.Drawing.Point(13, 74);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(332, 154);
+            this.groupBox3.Size = new System.Drawing.Size(332, 169);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Map data";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 16);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(269, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "Note: Files without number mapped will not be imported!";
+            // 
             // columnNumericUpDown5
             // 
-            this.columnNumericUpDown5.Location = new System.Drawing.Point(55, 123);
+            this.columnNumericUpDown5.Location = new System.Drawing.Point(54, 139);
             this.columnNumericUpDown5.Minimum = new decimal(new int[] {
             1,
             0,
@@ -170,7 +184,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(7, 126);
+            this.label11.Location = new System.Drawing.Point(6, 142);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(42, 13);
             this.label11.TabIndex = 19;
@@ -179,7 +193,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(134, 127);
+            this.label12.Location = new System.Drawing.Point(133, 143);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(19, 13);
             this.label12.TabIndex = 18;
@@ -191,7 +205,7 @@
             this.columnComboBox5.DisplayMember = "Name";
             this.columnComboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.columnComboBox5.FormattingEnabled = true;
-            this.columnComboBox5.Location = new System.Drawing.Point(179, 124);
+            this.columnComboBox5.Location = new System.Drawing.Point(178, 140);
             this.columnComboBox5.Name = "columnComboBox5";
             this.columnComboBox5.Size = new System.Drawing.Size(147, 21);
             this.columnComboBox5.TabIndex = 17;
@@ -204,7 +218,7 @@
             // 
             // columnNumericUpDown4
             // 
-            this.columnNumericUpDown4.Location = new System.Drawing.Point(55, 97);
+            this.columnNumericUpDown4.Location = new System.Drawing.Point(54, 113);
             this.columnNumericUpDown4.Minimum = new decimal(new int[] {
             1,
             0,
@@ -222,7 +236,7 @@
             // 
             // columnNumericUpDown3
             // 
-            this.columnNumericUpDown3.Location = new System.Drawing.Point(55, 71);
+            this.columnNumericUpDown3.Location = new System.Drawing.Point(54, 87);
             this.columnNumericUpDown3.Minimum = new decimal(new int[] {
             1,
             0,
@@ -241,7 +255,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(134, 100);
+            this.label5.Location = new System.Drawing.Point(133, 116);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(19, 13);
             this.label5.TabIndex = 14;
@@ -253,7 +267,7 @@
             this.columnComboBox4.DisplayMember = "Name";
             this.columnComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.columnComboBox4.FormattingEnabled = true;
-            this.columnComboBox4.Location = new System.Drawing.Point(179, 97);
+            this.columnComboBox4.Location = new System.Drawing.Point(178, 113);
             this.columnComboBox4.Name = "columnComboBox4";
             this.columnComboBox4.Size = new System.Drawing.Size(147, 21);
             this.columnComboBox4.TabIndex = 13;
@@ -263,7 +277,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 100);
+            this.label6.Location = new System.Drawing.Point(6, 116);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 13);
             this.label6.TabIndex = 12;
@@ -272,7 +286,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 74);
+            this.label7.Location = new System.Drawing.Point(6, 90);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 13);
             this.label7.TabIndex = 11;
@@ -281,7 +295,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(134, 75);
+            this.label8.Location = new System.Drawing.Point(133, 91);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(19, 13);
             this.label8.TabIndex = 10;
@@ -293,7 +307,7 @@
             this.columnComboBox3.DisplayMember = "Name";
             this.columnComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.columnComboBox3.FormattingEnabled = true;
-            this.columnComboBox3.Location = new System.Drawing.Point(179, 72);
+            this.columnComboBox3.Location = new System.Drawing.Point(178, 88);
             this.columnComboBox3.Name = "columnComboBox3";
             this.columnComboBox3.Size = new System.Drawing.Size(147, 21);
             this.columnComboBox3.TabIndex = 9;
@@ -302,7 +316,7 @@
             // 
             // columnNumericUpDown2
             // 
-            this.columnNumericUpDown2.Location = new System.Drawing.Point(55, 45);
+            this.columnNumericUpDown2.Location = new System.Drawing.Point(54, 61);
             this.columnNumericUpDown2.Minimum = new decimal(new int[] {
             1,
             0,
@@ -320,7 +334,7 @@
             // 
             // columnNumericUpDown1
             // 
-            this.columnNumericUpDown1.Location = new System.Drawing.Point(55, 19);
+            this.columnNumericUpDown1.Location = new System.Drawing.Point(54, 35);
             this.columnNumericUpDown1.Minimum = new decimal(new int[] {
             1,
             0,
@@ -339,7 +353,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(134, 48);
+            this.label4.Location = new System.Drawing.Point(133, 64);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(19, 13);
             this.label4.TabIndex = 6;
@@ -351,7 +365,7 @@
             this.columnComboBox2.DisplayMember = "Name";
             this.columnComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.columnComboBox2.FormattingEnabled = true;
-            this.columnComboBox2.Location = new System.Drawing.Point(179, 45);
+            this.columnComboBox2.Location = new System.Drawing.Point(178, 61);
             this.columnComboBox2.Name = "columnComboBox2";
             this.columnComboBox2.Size = new System.Drawing.Size(147, 21);
             this.columnComboBox2.TabIndex = 5;
@@ -361,7 +375,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 48);
+            this.label3.Location = new System.Drawing.Point(6, 64);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 4;
@@ -370,7 +384,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 22);
+            this.label2.Location = new System.Drawing.Point(6, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 13);
             this.label2.TabIndex = 3;
@@ -379,7 +393,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(134, 23);
+            this.label1.Location = new System.Drawing.Point(133, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(19, 13);
             this.label1.TabIndex = 2;
@@ -391,7 +405,7 @@
             this.columnComboBox1.DisplayMember = "Name";
             this.columnComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.columnComboBox1.FormattingEnabled = true;
-            this.columnComboBox1.Location = new System.Drawing.Point(179, 20);
+            this.columnComboBox1.Location = new System.Drawing.Point(178, 36);
             this.columnComboBox1.Name = "columnComboBox1";
             this.columnComboBox1.Size = new System.Drawing.Size(147, 21);
             this.columnComboBox1.TabIndex = 1;
@@ -401,7 +415,7 @@
             // newProjectButton
             // 
             this.newProjectButton.Enabled = false;
-            this.newProjectButton.Location = new System.Drawing.Point(12, 256);
+            this.newProjectButton.Location = new System.Drawing.Point(12, 271);
             this.newProjectButton.Name = "newProjectButton";
             this.newProjectButton.Size = new System.Drawing.Size(332, 23);
             this.newProjectButton.TabIndex = 7;
@@ -415,18 +429,18 @@
             this.omitRowsWithoutNamesCheckBox.Checked = true;
             this.omitRowsWithoutNamesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.omitRowsWithoutNamesCheckBox.Enabled = false;
-            this.omitRowsWithoutNamesCheckBox.Location = new System.Drawing.Point(12, 234);
+            this.omitRowsWithoutNamesCheckBox.Location = new System.Drawing.Point(12, 249);
             this.omitRowsWithoutNamesCheckBox.Name = "omitRowsWithoutNamesCheckBox";
-            this.omitRowsWithoutNamesCheckBox.Size = new System.Drawing.Size(143, 17);
+            this.omitRowsWithoutNamesCheckBox.Size = new System.Drawing.Size(165, 17);
             this.omitRowsWithoutNamesCheckBox.TabIndex = 8;
-            this.omitRowsWithoutNamesCheckBox.Text = "Omit rows without names";
+            this.omitRowsWithoutNamesCheckBox.Text = "Omit rows with missing values";
             this.omitRowsWithoutNamesCheckBox.UseVisualStyleBackColor = true;
             this.omitRowsWithoutNamesCheckBox.CheckedChanged += new System.EventHandler(this.omitRowsWithoutNamesCheckBox_CheckedChanged);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 286);
+            this.groupBox2.Location = new System.Drawing.Point(12, 301);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(333, 211);
             this.groupBox2.TabIndex = 10;
@@ -437,7 +451,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(358, 505);
+            this.ClientSize = new System.Drawing.Size(358, 529);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.omitRowsWithoutNamesCheckBox);
             this.Controls.Add(this.newProjectButton);
@@ -499,5 +513,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox columnComboBox3;
+        private System.Windows.Forms.Label label9;
     }
 }
