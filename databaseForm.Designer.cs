@@ -30,6 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readNamePropertyFromFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changePropertyValueMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chooseFileManuallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.typeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prefixColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.number = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,12 +43,6 @@
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.filepath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.readNamePropertyFromFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changePropertyValueMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chooseFileManuallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -65,10 +65,55 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(685, 262);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseUp);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.readNamePropertyFromFileToolStripMenuItem,
+            this.changePropertyValueMenuItem,
+            this.removeToolStripMenuItem,
+            this.chooseFileManuallyToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 136);
+            this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
+            // readNamePropertyFromFileToolStripMenuItem
+            // 
+            this.readNamePropertyFromFileToolStripMenuItem.Name = "readNamePropertyFromFileToolStripMenuItem";
+            this.readNamePropertyFromFileToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.readNamePropertyFromFileToolStripMenuItem.Text = "Read name property from file";
+            // 
+            // changePropertyValueMenuItem
+            // 
+            this.changePropertyValueMenuItem.Name = "changePropertyValueMenuItem";
+            this.changePropertyValueMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.changePropertyValueMenuItem.Text = "Change value of {0}";
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.removeToolStripMenuItem.Text = "Remove";
+            // 
+            // chooseFileManuallyToolStripMenuItem
+            // 
+            this.chooseFileManuallyToolStripMenuItem.Enabled = false;
+            this.chooseFileManuallyToolStripMenuItem.Name = "chooseFileManuallyToolStripMenuItem";
+            this.chooseFileManuallyToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.chooseFileManuallyToolStripMenuItem.Text = "Choose file manually";
             // 
             // typeColumn
             // 
@@ -104,18 +149,18 @@
             // 
             // nameColumn
             // 
-            this.nameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.nameColumn.HeaderText = "{0}";
             this.nameColumn.Name = "nameColumn";
             this.nameColumn.ReadOnly = true;
-            this.nameColumn.Width = 46;
             // 
             // filepath
             // 
-            this.filepath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.filepath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.filepath.HeaderText = "File";
             this.filepath.Name = "filepath";
             this.filepath.ReadOnly = true;
+            this.filepath.Width = 48;
             // 
             // statusColumn
             // 
@@ -124,49 +169,6 @@
             this.statusColumn.Name = "statusColumn";
             this.statusColumn.ReadOnly = true;
             this.statusColumn.Width = 62;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.readNamePropertyFromFileToolStripMenuItem,
-            this.changePropertyValueMenuItem,
-            this.removeToolStripMenuItem,
-            this.chooseFileManuallyToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 136);
-            this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.openToolStripMenuItem.Text = "Open";
-            // 
-            // readNamePropertyFromFileToolStripMenuItem
-            // 
-            this.readNamePropertyFromFileToolStripMenuItem.Name = "readNamePropertyFromFileToolStripMenuItem";
-            this.readNamePropertyFromFileToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.readNamePropertyFromFileToolStripMenuItem.Text = "Read name property from file";
-            // 
-            // changePropertyValueMenuItem
-            // 
-            this.changePropertyValueMenuItem.Name = "changePropertyValueMenuItem";
-            this.changePropertyValueMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.changePropertyValueMenuItem.Text = "Change value of {0}";
-            // 
-            // removeToolStripMenuItem
-            // 
-            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.removeToolStripMenuItem.Text = "Remove";
-            // 
-            // chooseFileManuallyToolStripMenuItem
-            // 
-            this.chooseFileManuallyToolStripMenuItem.Enabled = false;
-            this.chooseFileManuallyToolStripMenuItem.Name = "chooseFileManuallyToolStripMenuItem";
-            this.chooseFileManuallyToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.chooseFileManuallyToolStripMenuItem.Text = "Choose file manually";
             // 
             // databaseForm
             // 

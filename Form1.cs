@@ -103,6 +103,7 @@ namespace SwProjectInterface
                 return;
             }
             NumberInputForm nif = new NumberInputForm(project, project.partPrefix, project.partSuffix);
+            nif.primitiveActive(true);
             nif.ShowDialog();
             if (!nif.OK)
             {
@@ -136,7 +137,15 @@ namespace SwProjectInterface
             } 
             if (ret == SWFile.RET_OK)
             {
-                f.save();
+                switch (nif.selectedPrimitive.Value)
+                {
+                    case standardPrimitiveType.U_SHAPE:
+                            f.save_Uprofile();
+                            break;
+                    default: // also NONE
+                            f.save();
+                            break;
+                }
                 f.addToProject();
             }
             dbForm.update();
@@ -477,7 +486,7 @@ namespace SwProjectInterface
                 }
                 if (ret == SWFile.RET_NAME_EXISTS)
                 {
-                    MessageBox.Show("Part or Assembly with this name already exists!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Part or Assembly with this prefix number suffix combination already exists!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 if (ret == SWFile.RET_FILE_EXISTS)
                 {

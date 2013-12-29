@@ -82,16 +82,6 @@ namespace SwProjectInterface
             }
             return n.ToString();
         }
-        
-        private bool fileNameChecker(string s)
-        {
-            return s == prefix + fourDigit(number) + suffix;
-        }
-
-        private bool numberChecker(int i)
-        {
-            return i == number;
-        }
 
         private TForm getForm<TForm>()
             where TForm : Form
@@ -258,18 +248,19 @@ namespace SwProjectInterface
 
         public int create()
         {
-            file = prefix + fourDigit(number) + suffix + extension;
-            if (File.Exists(Path.Combine(project.workDir, file)))
-            {
-                return RET_FILE_EXISTS;
-            }
-            if (project.filenames.Exists(fileNameChecker))
+            file = prefix + fourDigit(number) + suffix;
+            if (project.filenames.Contains(file))
             {
                 return RET_NAME_EXISTS;
             }
-            if (project.numbers.Exists(numberChecker))
+            file += extension;
+            if (project.numbers.Contains(number))
             {
                 return RET_DUPLICATE_NUMBER;
+            }
+            if (File.Exists(Path.Combine(project.workDir, file)))
+            {
+                return RET_FILE_EXISTS;
             }
             return RET_OK;
         }

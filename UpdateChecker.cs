@@ -44,7 +44,7 @@ namespace SwProjectInterface
                 }
                 if (String.Compare(version, Assembly.GetExecutingAssembly().GetName().Version.ToString()) == 1)
                 {
-                    DialogResult r = MessageBox.Show("New version of SwProjectInterface is available to download. Would you like to download it?", "Update available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    DialogResult r = MessageBox.Show("New version of SwProjectInterface is available to download. Would you like to open download website?", "Update available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (r == DialogResult.Yes)
                     {
                         Process.Start(downloadURL);

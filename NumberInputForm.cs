@@ -19,6 +19,15 @@ namespace SwProjectInterface
         public bool working = true;
 
         private Project _project;
+        private standardPrimitive selected_primitive;
+
+        public standardPrimitive selectedPrimitive
+        {
+            get
+            {
+                return selected_primitive;
+            }
+        }
 
         public NumberInputForm(Project project, string prefix, string suffix)
         {
@@ -35,6 +44,17 @@ namespace SwProjectInterface
                     break;
                 }
             }
+        }
+
+        public void primitiveActive(bool active)
+        {
+            label1.Enabled = active;
+            standardPrimitiveComboBox.Enabled = active;
+            // populate comboBox
+            BindingList<standardPrimitive> fields = new BindingList<standardPrimitive>();
+            fields.Add(new standardPrimitive("None", standardPrimitiveType.NONE));
+            fields.Add(new standardPrimitive("U-shape", standardPrimitiveType.U_SHAPE));
+            standardPrimitiveComboBox.DataSource = fields;
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -57,6 +77,11 @@ namespace SwProjectInterface
         {
             working = false;
             this.Close();
+        }
+
+        private void standardPrimitiveComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selected_primitive = (standardPrimitive)standardPrimitiveComboBox.SelectedItem;
         }
     }
 }
