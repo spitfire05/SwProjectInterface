@@ -39,9 +39,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.suffixTextBox = new System.Windows.Forms.TextBox();
-            this.standardPrimitiveComboBox = new System.Windows.Forms.ComboBox();
             this.standardPrimitiveBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.nameGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -52,7 +50,7 @@
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(12, 138);
+            this.okButton.Location = new System.Drawing.Point(12, 111);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 1;
@@ -63,7 +61,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(293, 138);
+            this.cancelButton.Location = new System.Drawing.Point(293, 111);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 2;
@@ -148,45 +146,14 @@
             this.suffixTextBox.Size = new System.Drawing.Size(88, 20);
             this.suffixTextBox.TabIndex = 10;
             // 
-            // standardPrimitiveComboBox
-            // 
-            this.standardPrimitiveComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.standardPrimitiveBindingSource, "Value", true));
-            this.standardPrimitiveComboBox.DataSource = this.standardPrimitiveBindingSource;
-            this.standardPrimitiveComboBox.DisplayMember = "Name";
-            this.standardPrimitiveComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.standardPrimitiveComboBox.Enabled = false;
-            this.standardPrimitiveComboBox.FormattingEnabled = true;
-            this.standardPrimitiveComboBox.Location = new System.Drawing.Point(172, 111);
-            this.standardPrimitiveComboBox.Name = "standardPrimitiveComboBox";
-            this.standardPrimitiveComboBox.Size = new System.Drawing.Size(190, 21);
-            this.standardPrimitiveComboBox.TabIndex = 10;
-            this.standardPrimitiveComboBox.ValueMember = "Value";
-            this.standardPrimitiveComboBox.SelectedIndexChanged += new System.EventHandler(this.standardPrimitiveComboBox_SelectedIndexChanged);
-            // 
-            // standardPrimitiveBindingSource
-            // 
-            this.standardPrimitiveBindingSource.DataSource = typeof(SwProjectInterface.standardPrimitive);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Enabled = false;
-            this.label1.Location = new System.Drawing.Point(17, 114);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Add standard primitive sketch:";
-            // 
             // NumberInputForm
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(380, 170);
+            this.ClientSize = new System.Drawing.Size(380, 142);
             this.ControlBox = false;
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.standardPrimitiveComboBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -211,7 +178,6 @@
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.standardPrimitiveBindingSource)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -227,8 +193,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox suffixTextBox;
-        private System.Windows.Forms.ComboBox standardPrimitiveComboBox;
         private System.Windows.Forms.BindingSource standardPrimitiveBindingSource;
-        private System.Windows.Forms.Label label1;
     }
 }

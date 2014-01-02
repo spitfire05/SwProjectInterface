@@ -103,7 +103,6 @@ namespace SwProjectInterface
                 return;
             }
             NumberInputForm nif = new NumberInputForm(project, project.partPrefix, project.partSuffix);
-            nif.primitiveActive(true);
             nif.ShowDialog();
             if (!nif.OK)
             {
@@ -137,15 +136,7 @@ namespace SwProjectInterface
             } 
             if (ret == SWFile.RET_OK)
             {
-                switch (nif.selectedPrimitive.Value)
-                {
-                    case standardPrimitiveType.U_SHAPE:
-                            f.save_Uprofile();
-                            break;
-                    default: // also NONE
-                            f.save();
-                            break;
-                }
+                f.save();
                 f.addToProject();
             }
             dbForm.update();

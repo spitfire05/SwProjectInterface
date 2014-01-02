@@ -19,7 +19,7 @@ namespace SwProjectInterface
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://spitfire05.github.io/SwProjectInterface");
+            Process.Start("http://spitfire05.github.io/SwProjectInterface/index.html");
         }
     }
 }

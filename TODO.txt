@@ -5,6 +5,5 @@
 - add batch name reading from all files (warn for resources)
 - add possibility to add mutliple existing files
 - add other import/export formats (ods)
-- add possibility for creating basic primitives in new parts
 - improve exporter stub
 - add backup files option

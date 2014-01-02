@@ -9,7 +9,7 @@ USAGE: Unzip the files to the folder of your choice and run SwProjectInterface.e
 
 CHANGELOG:
 
-0.1.0.0 [WIP]
+0.1.0.0
 =======
 - BUGFIX: Now reading user settings from previours program version if present are missing.
 - Added option to change the custom property value of existing files.

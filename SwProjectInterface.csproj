@@ -150,7 +150,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="standardPrimitive.cs" />
     <Compile Include="SWFile.cs" />
     <Compile Include="UpdateChecker.cs" />
     <EmbeddedResource Include="AboutForm.resx">
