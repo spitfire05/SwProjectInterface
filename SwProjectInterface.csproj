@@ -79,11 +79,11 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="SolidWorks.Interop.sldworks">
-      <HintPath>..\..\..\..\..\Program Files\SolidWorks Corp\SolidWorks\api\redist\CLR2\SolidWorks.Interop.sldworks.dll</HintPath>
+      <HintPath>api\SolidWorks.Interop.sldworks.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="SolidWorks.Interop.swconst">
-      <HintPath>..\..\..\..\..\Program Files\SolidWorks Corp\SolidWorks\api\redist\CLR2\SolidWorks.Interop.swconst.dll</HintPath>
+      <HintPath>api\SolidWorks.Interop.swconst.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />

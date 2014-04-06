@@ -9,8 +9,14 @@ USAGE: Unzip the files to the folder of your choice and run SwProjectInterface.e
 
 CHANGELOG:
 
-0.1.0.0
-=======
+0.1.1
+=====
+- Fix crash when attempting to save imported project.
+- Change "Prefix + Name + Suffix" to "Prefix + Number + Suffix" in import fields.
+- Will now ask for save when closing project.
+
+0.1.0
+=====
 - BUGFIX: Now reading user settings from previours program version if present are missing.
 - Added option to change the custom property value of existing files.
 - User will now be notified when new version is available online.
@@ -20,8 +26,8 @@ CHANGELOG:
 - Minor CSVImport bugfixes and features
 - Fix bug where it was possible to add same file to project multiple times
 
-0.0.2.0
-=======
+0.0.2
+=====
 - Program version stored in project file for future compatibility purposes.
 - Database "Open", "Update name" and "Remove" buttons moved to right-click context menu.
 - Added option to find missing files manually.
@@ -34,6 +40,6 @@ CHANGELOG:
 - simple CSV export added.
 - Few minor bugfixes.
 
-0.0.1.0
-=======
+0.0.1
+=====
 - First version ready to testing. The custom property key value is hardcoded, to be opened in next version.

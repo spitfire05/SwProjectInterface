@@ -28,7 +28,7 @@ namespace SwProjectInterface
             BindingList<importField> fields;
             fields = new BindingList<importField>();
             fields.Add(new importField("None", importFieldValue.NONE));
-            fields.Add(new importField("Prefix + Name + Suffix", importFieldValue.PREFIX_NUMBER_SUFFIX));
+            fields.Add(new importField("Prefix + Number + Suffix", importFieldValue.PREFIX_NUMBER_SUFFIX));
             fields.Add(new importField(Settings.Default.propertyName, importFieldValue.NAME));
             fields.Add(new importField("Prefix", importFieldValue.PREFIX));
             fields.Add(new importField("Suffix", importFieldValue.SUFFIX));

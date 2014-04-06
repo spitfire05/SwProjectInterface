@@ -238,7 +238,7 @@ namespace SwProjectInterface
 
         private void projectSaveButton_Click(object sender, EventArgs e)
         {
-            if (project.file == null)
+            if (project.file == null || project.file == "")
             {
                 SaveFileDialog fd = new SaveFileDialog();
                 fd.Filter = "SWPI project file|*.swpi";
@@ -548,6 +548,7 @@ namespace SwProjectInterface
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            askSave();
             this.workDirTextBox.Text = "";
             this.partPrefixTextBox.Text = "";
             this.partSuffixTextBox.Text = "";
