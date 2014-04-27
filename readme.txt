@@ -3,11 +3,16 @@
 Requires:
 
 * .NET framework 3.5 or newer.
-* SolidWorks (tested with 2013 SP4)
+* SolidWorks (tested with 2013 SP4 and 2014 SP2)
 
 USAGE: Unzip the files to the folder of your choice and run SwProjectInterface.exe
 
 CHANGELOG:
+
+0.2.0
+=====
+- Added possibility to batch-add existing files.
+- Added tracking of recently opened projects.
 
 0.1.1
 =====

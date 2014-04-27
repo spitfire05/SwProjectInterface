@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace SwProjectInterface
 {
@@ -33,32 +32,86 @@ namespace SwProjectInterface
             partTemplateTextBox.Text = Settings.Default.partTemplate;
             propertyNameTextBox.Text = Settings.Default.propertyName;
 
+            this.populateRecent();
+
             string[] args = Environment.GetCommandLineArgs();
 
             if (args.Length > 1)
             {
-                try
-                {
-                    project.open(args[1]);
-                }
-                catch (ProjectReadException exception)
-                {
-                    MessageBox.Show("XML parse error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                workDirTextBox.Text = project.workDir;
-                partPrefixTextBox.Text = project.partPrefix;
-                partSuffixTextBox.Text = project.partSuffix;
-                assyPrefixTextBox.Text = project.assyPrefix;
-                assySuffixTextBox.Text = project.assySuffix;
-                activateUI();
-                if (!dbForm.Visible)
-                {
-                    prep_DBForm();
-                }
-                dbForm.update();
-                dbForm.Show();
+                loadProject(args[1].ToString());
             }
+        }
+
+        private void populateRecent()
+        {
+            recentProjectsToolStripMenuItem.Enabled = false;
+            recentProjectsToolStripMenuItem.DropDownItems.Clear();
+            if (Settings.Default.RecentProjects == null)
+            {
+                Settings.Default.RecentProjects = new System.Collections.Specialized.StringCollection();
+            }
+            foreach (String path in Settings.Default.RecentProjects)
+            {
+                recentProjectsToolStripMenuItem.DropDownItems.Add(path, null, onRecentClick);
+                recentProjectsToolStripMenuItem.Enabled = true;
+            }
+        }
+
+        private void loadProject(String path)
+        {
+            if (this.project != new Project())
+            {
+                this.askSave();
+                this.project = new Project();
+                this.onProjectCloseUI();
+            }
+            try
+            {
+                this.project.open(path);
+            }
+            catch (ProjectReadException exception)
+            {
+                MessageBox.Show("XML parse error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            this.populateRecent();
+            this.onProjectOpenUI();
+        }
+
+        private void onProjectOpenUI()
+        {
+            workDirTextBox.Text = project.workDir;
+            partPrefixTextBox.Text = project.partPrefix;
+            partSuffixTextBox.Text = project.partSuffix;
+            assyPrefixTextBox.Text = project.assyPrefix;
+            assySuffixTextBox.Text = project.assySuffix;
+            activateUI();
+            if (!dbForm.Visible)
+            {
+                prep_DBForm();
+            }
+            dbForm.update();
+            dbForm.Show();
+        }
+
+        private void onProjectCloseUI()
+        {
+            this.workDirTextBox.Text = "";
+            this.partPrefixTextBox.Text = "";
+            this.partSuffixTextBox.Text = "";
+            this.assyPrefixTextBox.Text = "";
+            this.assySuffixTextBox.Text = "";
+            this.activateUI(true);
+            this.project = new Project();
+            if (this.dbForm.Visible)
+            {
+                this.dbForm.Close();
+            }
+        }
+
+        private void onRecentClick(object sender, EventArgs e)
+        {
+            this.loadProject(sender.ToString());
         }
 
         public void prep_DBForm()
@@ -404,90 +457,82 @@ namespace SwProjectInterface
                 return;
             }
             OpenFileDialog fd = new OpenFileDialog();
-            fd.Multiselect = false;
+            fd.Multiselect = true;
             fd.Filter = "SolidWorks Part|*.sldprt|Solidworks Assembly|*.sldasm";
             DialogResult result = fd.ShowDialog();
             if (result == DialogResult.OK)
             {
-                if (!(fd.FileName.ToLower().StartsWith(project.workDir.ToLower())))
+                foreach (String FileName in fd.FileNames)
                 {
-                    MessageBox.Show("File is not in the workdir!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                string[] p = SWFile.getFileParams(Path.GetFileNameWithoutExtension(fd.FileName));
-                if (p[1] == "")
-                {
-                    MessageBox.Show("File name has to include a four-digit part number!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                //FilePropsForm fpf = new FilePropsForm();
-                //fpf.prefixTextBox.Text = p[0];
-                //fpf.numericUpDown1.Value = Convert.ToInt32(p[1]);
-                //fpf.suffixTextBox.Text = p[2];
-                //fpf.ShowDialog();
-                //if (!fpf.OK)
-                //{
-                //    return;
-                //}
-                //p[0] = fpf.prefixTextBox.Text;
-                //p[1] = fpf.numericUpDown1.Value.ToString();
-                //p[2] = fpf.suffixTextBox.Text;
-                SWFile f = null;
-
-                if (fd.FileName.ToLower().EndsWith(".sldprt"))
-                {
-
-                    f = new SWPart()
+                    if (!(FileName.ToLower().StartsWith(project.workDir.ToLower())))
                     {
-                        project = project,
-                        number = Convert.ToInt32(p[1]),
-                        name = "",
-                        prefix = p[0],
-                        suffix = p[2],
-                        template = null,
-                    };
-                }
-                else if (fd.FileName.ToLower().EndsWith(".sldasm"))
-                {
-                    f = new SWAssy()
-                    {
-                        project = project,
-                        number = Convert.ToInt32(p[1]),
-                        name = "",
-                        prefix = p[0],
-                        suffix = p[2],
-                        template = null,
-                    };
-                }
-                else
-                {
-                    MessageBox.Show("This is not SolidWorks Part or Assembly!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                        MessageBox.Show(String.Format("File {0} is not in the workdir! Not adding this file.", FileName), "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        continue;
+                    }
 
-                int ret = f.create();
-                if (ret == SWFile.RET_DUPLICATE_NUMBER)
-                {
-                    DialogResult r = MessageBox.Show("Part or Assembly with number entered already exists in database. Add anyway?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (r == DialogResult.Yes)
+                    string[] p = SWFile.getFileParams(Path.GetFileNameWithoutExtension(FileName));
+                    if (p[1] == "")
                     {
+                        MessageBox.Show(String.Format("File {0} name does not include a four-digit part number! Not adding this file.", FileName), "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        continue;
+                    }
+                    SWFile f = null;
+
+                    if (FileName.ToLower().EndsWith(".sldprt"))
+                    {
+
+                        f = new SWPart()
+                        {
+                            project = project,
+                            number = Convert.ToInt32(p[1]),
+                            name = "",
+                            prefix = p[0],
+                            suffix = p[2],
+                            template = null,
+                        };
+                    }
+                    else if (FileName.ToLower().EndsWith(".sldasm"))
+                    {
+                        f = new SWAssy()
+                        {
+                            project = project,
+                            number = Convert.ToInt32(p[1]),
+                            name = "",
+                            prefix = p[0],
+                            suffix = p[2],
+                            template = null,
+                        };
+                    }
+                    else
+                    {
+                        MessageBox.Show(String.Format("{0} is not SolidWorks Part or Assembly!", FileName), "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        continue;
+                    }
+
+                    int ret = f.create();
+                    if (ret == SWFile.RET_DUPLICATE_NUMBER)
+                    {
+                        DialogResult r = MessageBox.Show(String.Format("{0}: Part or Assembly with this number already exists in database. Add anyway?", FileName), "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (r == DialogResult.Yes)
+                        {
+                            ret = SWFile.RET_OK;
+                        }
+                    }
+                    if (ret == SWFile.RET_NAME_EXISTS)
+                    {
+                        MessageBox.Show(String.Format("{0}: Part or Assembly with this prefix number suffix combination already exists! Not adding this file.", FileName), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        continue;
+                    }
+                    if (ret == SWFile.RET_FILE_EXISTS)
+                    {
+                        // Yes, we are adding it right now:)
                         ret = SWFile.RET_OK;
                     }
-                }
-                if (ret == SWFile.RET_NAME_EXISTS)
-                {
-                    MessageBox.Show("Part or Assembly with this prefix number suffix combination already exists!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                if (ret == SWFile.RET_FILE_EXISTS)
-                {
-                    // Yes, we are adding it right now:)
-                    ret = SWFile.RET_OK;
-                }
-                if (ret == SWFile.RET_OK)
-                {
-                    f.getNameFromFile();
-                    f.addToProject();
+                    if (ret == SWFile.RET_OK)
+                    {
+                        f.getNameFromFile();
+                        f.addToProject();
+                    }
                 }
             }
             dbForm.update();
@@ -541,25 +586,15 @@ namespace SwProjectInterface
             MessageBox.Show(String.Format("Done. {0} missing files were found as assemblies on disk.", numFound), "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void aboutButton_Click(object sender, EventArgs e)
-        {
-            new AboutForm().ShowDialog();
-        }
-
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            askSave();
-            this.workDirTextBox.Text = "";
-            this.partPrefixTextBox.Text = "";
-            this.partSuffixTextBox.Text = "";
-            this.assyPrefixTextBox.Text = "";
-            this.assySuffixTextBox.Text = "";
-            this.activateUI(true);
-            this.project = new Project();
-            if (this.dbForm.Visible)
-            {
-                this.dbForm.Close();
-            }
+            this.askSave();
+            this.onProjectCloseUI();
+        }
+
+        private void showInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutForm().ShowDialog();
         }
     }
 }

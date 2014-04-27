@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Diagnostics;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace SwProjectInterface
 {
@@ -15,6 +10,7 @@ namespace SwProjectInterface
         public AboutForm()
         {
             InitializeComponent();
+            infoLabel.Text = String.Format(infoLabel.Text, Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, 5));
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

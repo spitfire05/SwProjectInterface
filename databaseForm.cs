@@ -135,7 +135,14 @@ namespace SwProjectInterface
         {
             OpenFileDialog fd = new OpenFileDialog();
             fd.Multiselect = false;
-            fd.Filter = "SolidWorks Part|*.sldprt|Solidworks Assembly|*.sldasm";
+            if (f.typeString == new SWPart().typeString)
+            {
+                fd.Filter = "SolidWorks Part|*.sldprt";
+            }
+            else
+            {
+                fd.Filter = "Solidworks Assembly|*.sldasm";
+            }
             DialogResult r = fd.ShowDialog();
             if (r == DialogResult.OK)
             {

@@ -196,6 +196,15 @@ namespace SwProjectInterface
                 numbers.Add(f.number);
                 filenames.Add(f.prefix + SWFile.fourDigit(f.number) + f.suffix);
             }
+            while (Settings.Default.RecentProjects.Contains(path))
+            {
+                Settings.Default.RecentProjects.Remove(path);
+            }
+            Settings.Default.RecentProjects.Insert(0, path);
+            while (Settings.Default.RecentProjects.Count >= 5)
+            {
+                Settings.Default.RecentProjects.RemoveAt(6);
+            }
             _openedOK = true;
         }
 

@@ -17,5 +17,8 @@
     <Setting Name="CSVImportDelimiter" Type="System.String" Scope="User">
       <Value Profile="(Default)">;</Value>
     </Setting>
+    <Setting Name="RecentProjects" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
