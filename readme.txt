@@ -9,7 +9,7 @@ USAGE: Unzip the files to the folder of your choice and run SwProjectInterface.e
 
 CHANGELOG:
 
-0.2.0
+0.2.0 [WIP]
 =====
 - Added possibility to batch-add existing files.
 - Added tracking of recently opened projects.
