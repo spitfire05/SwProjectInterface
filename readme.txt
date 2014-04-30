@@ -13,6 +13,8 @@ CHANGELOG:
 =====
 - Added possibility to batch-add existing files.
 - Added tracking of recently opened projects.
+- Added option to show empty rows, in numerical order (switch in right-click menu in database view).
+- Added possibility of registering .swpi extension with current exe (under "Tools" menu).
 
 0.1.1
 =====

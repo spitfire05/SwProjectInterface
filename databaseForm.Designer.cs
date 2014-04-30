@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(databaseForm));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.typeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prefixColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +44,8 @@
             this.changePropertyValueMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chooseFileManuallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.showEmptyRowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -133,9 +136,11 @@
             this.readNamePropertyFromFileToolStripMenuItem,
             this.changePropertyValueMenuItem,
             this.removeToolStripMenuItem,
-            this.chooseFileManuallyToolStripMenuItem});
+            this.chooseFileManuallyToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.showEmptyRowsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 136);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 142);
             this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
             // 
             // openToolStripMenuItem
@@ -170,6 +175,17 @@
             this.chooseFileManuallyToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.chooseFileManuallyToolStripMenuItem.Text = "Choose file manually";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(226, 6);
+            // 
+            // showEmptyRowsToolStripMenuItem
+            // 
+            this.showEmptyRowsToolStripMenuItem.Name = "showEmptyRowsToolStripMenuItem";
+            this.showEmptyRowsToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.showEmptyRowsToolStripMenuItem.Text = "Show empty rows";
+            // 
             // databaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -177,6 +193,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(685, 262);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(150, 50);
             this.Name = "databaseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -205,5 +222,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn filepath;
         private System.Windows.Forms.DataGridViewTextBoxColumn statusColumn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem showEmptyRowsToolStripMenuItem;
     }
 }

@@ -37,16 +37,41 @@ namespace SwProjectInterface
             filesToUpdate.Clear();
         }
 
+        private void createEmptyRow(int n)
+        {
+            if (n > 9999)
+            {
+                return;
+            }
+            DataGridViewRow row = new DataGridViewRow();
+            row.CreateCells(dataGridView1, "", "", SWFile.fourDigit(n), "", "", "", "");
+            dataGridView1.Rows.Add(row);
+        }
+
         public void update()
         {
             dataGridView1.Columns[nameColumn.Name].HeaderText = Settings.Default.propertyName;
             dataGridView1.Rows.Clear();
             List<SWFile> files_s = project.files.OrderBy<SWFile, int>(x => x.number).ToList<SWFile>();
+            int n = 0;
             foreach (SWFile f in files_s)
             {
+                n++;
+                while (f.number < n)
+                {
+                    n--;
+                }
                 DataGridViewRow row = new DataGridViewRow();
                 SWFileStatus s = f.getStatus();
                 f.lastShownStatus = s;
+                if (Settings.Default.showEmptyRows)
+                {
+                    while (f.number > n)
+                    {
+                        this.createEmptyRow(n);
+                        n++;
+                    }
+                }
                 row.CreateCells(dataGridView1, f.typeString, f.prefix, SWFile.fourDigit(f.number), f.suffix, f.name, f.file, s.ToString());
                 if (row.Cells.Count == 0)
                 {
@@ -112,10 +137,41 @@ namespace SwProjectInterface
 
                     contextMenuStrip1.Items[changePropertyValueMenuItem.Name].Text = String.Format(contextMenuStrip1.Items[changePropertyValueMenuItem.Name].Text, Settings.Default.propertyName);
 
-                    contextMenuStrip1.Items[chooseFileManuallyToolStripMenuItem.Name].Enabled = false;
-                    if (currentContextFile.getStatus().Type == SWFileStatusType.FILE_MISSING)
+                    // Enable items by default
+                    foreach (object x in contextMenuStrip1.Items)
                     {
-                        contextMenuStrip1.Items[chooseFileManuallyToolStripMenuItem.Name].Enabled = true;
+                        if (x.GetType() == toolStripSeparator1.GetType())
+                        {
+                            continue;
+                        }
+                        ToolStripMenuItem q = (ToolStripMenuItem)x;
+                        q.Enabled = true;
+                    }
+
+                    if (currentContextFile != null)
+                    {
+                        contextMenuStrip1.Items[chooseFileManuallyToolStripMenuItem.Name].Enabled = false;
+                        if (currentContextFile.getStatus().Type == SWFileStatusType.FILE_MISSING)
+                        {
+                            contextMenuStrip1.Items[chooseFileManuallyToolStripMenuItem.Name].Enabled = true;
+                        }
+                    }
+                    else
+                    {
+                        foreach (object x in contextMenuStrip1.Items)
+                        {
+                            if (x.GetType() == toolStripSeparator1.GetType())
+                            {
+                                break;
+                            }
+                            ToolStripMenuItem q = (ToolStripMenuItem)x;
+                            q.Enabled = false;
+                        }
+                    }
+
+                    if (Settings.Default.showEmptyRows)
+                    {
+                        showEmptyRowsToolStripMenuItem.Checked = true;
                     }
                     contextMenuStrip1.Show(dataGridView1, e.Location);
                 }
@@ -219,6 +275,20 @@ namespace SwProjectInterface
             {
                 // Choose manually
                 chooseFile(currentContextFile);
+            }
+            else if (e.ClickedItem == contextMenuStrip1.Items[showEmptyRowsToolStripMenuItem.Name])
+            {
+                // Show empty rows
+                if (showEmptyRowsToolStripMenuItem.Checked)
+                {
+                    showEmptyRowsToolStripMenuItem.Checked = false;
+                }
+                else
+                {
+                    showEmptyRowsToolStripMenuItem.Checked = true;
+                }
+                Settings.Default.showEmptyRows = showEmptyRowsToolStripMenuItem.Checked;
+                this.update();
             }
             // Re-disable menus that should be disabled by default
             contextMenuStrip1.Items[chooseFileManuallyToolStripMenuItem.Name].Enabled = false;

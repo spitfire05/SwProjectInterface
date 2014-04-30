@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace SwProjectInterface
 {
@@ -595,6 +596,14 @@ namespace SwProjectInterface
         private void showInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new AboutForm().ShowDialog();
+        }
+
+        private void registerswpiFilesWithSwProjectInterfaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String path = Environment.GetCommandLineArgs()[0];
+            Registry.ClassesRoot.CreateSubKey(".swpi").SetValue("", "SwProjectInterface.swpi", RegistryValueKind.String);
+            Registry.ClassesRoot.CreateSubKey("SwProjectInterface.swpi").CreateSubKey("shell").CreateSubKey("open").CreateSubKey("command").SetValue("", String.Format("{0} %1", path));
+            MessageBox.Show(String.Format(".swpi extension registered with this copy of SwProjectInterface!\n\n[{0}]", path), "Extension registered.", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

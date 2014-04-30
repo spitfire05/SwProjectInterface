@@ -76,6 +76,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>swpi.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="SolidWorks.Interop.sldworks">
@@ -210,6 +213,7 @@
     <Content Include="readme.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="swpi.ico" />
     <None Include="SwProjectInterface_TemporaryKey.pfx" />
     <None Include="TODO.txt" />
   </ItemGroup>

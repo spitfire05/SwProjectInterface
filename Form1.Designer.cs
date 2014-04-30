@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.createPartButton = new System.Windows.Forms.Button();
             this.partTemplateTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -72,6 +73,8 @@
             this.showDatabaseFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registerswpiFilesWithSwProjectInterfaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -389,6 +392,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.projectToolStripMenuItem,
             this.viewToolStripMenuItem,
+            this.toolsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -501,6 +505,21 @@
             this.showInfoToolStripMenuItem.Text = "Show info...";
             this.showInfoToolStripMenuItem.Click += new System.EventHandler(this.showInfoToolStripMenuItem_Click);
             // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.registerswpiFilesWithSwProjectInterfaceToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // registerswpiFilesWithSwProjectInterfaceToolStripMenuItem
+            // 
+            this.registerswpiFilesWithSwProjectInterfaceToolStripMenuItem.Name = "registerswpiFilesWithSwProjectInterfaceToolStripMenuItem";
+            this.registerswpiFilesWithSwProjectInterfaceToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.registerswpiFilesWithSwProjectInterfaceToolStripMenuItem.Text = "Register .swpi files with SwProjectInterface";
+            this.registerswpiFilesWithSwProjectInterfaceToolStripMenuItem.Click += new System.EventHandler(this.registerswpiFilesWithSwProjectInterfaceToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -516,6 +535,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "SwProjectInterface";
@@ -592,6 +612,8 @@
         private System.Windows.Forms.ToolStripMenuItem showInfoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recentProjectsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registerswpiFilesWithSwProjectInterfaceToolStripMenuItem;
     }
 }
 

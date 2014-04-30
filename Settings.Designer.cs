@@ -93,5 +93,17 @@ namespace SwProjectInterface {
                 this["RecentProjects"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool showEmptyRows {
+            get {
+                return ((bool)(this["showEmptyRows"]));
+            }
+            set {
+                this["showEmptyRows"] = value;
+            }
+        }
     }
 }
