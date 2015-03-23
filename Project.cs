@@ -203,7 +203,7 @@ namespace SwProjectInterface
             Settings.Default.RecentProjects.Insert(0, path);
             while (Settings.Default.RecentProjects.Count >= 5)
             {
-                Settings.Default.RecentProjects.RemoveAt(6);
+                Settings.Default.RecentProjects.RemoveAt(4);
             }
             _openedOK = true;
         }

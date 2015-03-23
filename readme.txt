@@ -3,11 +3,15 @@
 Requires:
 
 * .NET framework 3.5 or newer.
-* SolidWorks (tested with 2013 SP4 and 2014 SP2)
+* SolidWorks (tested with 2013, 2014 and 2015)
 
 USAGE: Unzip the files to the folder of your choice and run SwProjectInterface.exe
 
 CHANGELOG:
+
+0.2.1
+=====
+- Fixed crash occuring when trying to open fifth project in a row.
 
 0.2.0
 =====
