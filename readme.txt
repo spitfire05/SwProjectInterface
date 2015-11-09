@@ -9,6 +9,10 @@ USAGE: Unzip the files to the folder of your choice and run SwProjectInterface.e
 
 CHANGELOG:
 
+0.3.0
+=====
+- Added simple filtering feature in database view window.
+
 0.2.1
 =====
 - Fixed crash occuring when trying to open fifth project in a row.
