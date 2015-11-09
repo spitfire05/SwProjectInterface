@@ -50,9 +50,15 @@ namespace SwProjectInterface
 
         public void update()
         {
+            string filter = filterTextBox.Text.ToLower();
             dataGridView1.Columns[nameColumn.Name].HeaderText = Settings.Default.propertyName;
             dataGridView1.Rows.Clear();
-            List<SWFile> files_s = project.files.OrderBy<SWFile, int>(x => x.number).ToList<SWFile>();
+            List<SWFile> files_s = project.files.OrderBy<SWFile, int>(x => x.number).Where(
+                x => x.name.ToLower().Contains(filter) || SWFile.fourDigit(x.number).Contains(filter) ||
+                    x.prefix.ToLower().Contains(filter) || x.suffix.ToLower().Contains(filter) ||
+                    x.file.ToLower().Contains(filter)
+                ).ToList<SWFile>();
+            countLabel.Text = String.Format("Count: {0}", files_s.Count);
             int n = 0;
             foreach (SWFile f in files_s)
             {
@@ -64,7 +70,7 @@ namespace SwProjectInterface
                 DataGridViewRow row = new DataGridViewRow();
                 SWFileStatus s = f.getStatus();
                 f.lastShownStatus = s;
-                if (Settings.Default.showEmptyRows)
+                if (Settings.Default.showEmptyRows && filter == "")
                 {
                     while (f.number > n)
                     {
@@ -312,6 +318,20 @@ namespace SwProjectInterface
         private void databaseForm_Shown(object sender, EventArgs e)
         {
             aTimer.Start();
+        }
+
+        private void filterTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //filterTextBox.Text = String.Format("%c", e.KeyChar);
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                update();
+            }
+        }
+
+        private void filterApplyButton_Click(object sender, EventArgs e)
+        {
+            update();
         }
     }
 }

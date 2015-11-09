@@ -87,6 +87,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "AboutForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "About";
             this.ResumeLayout(false);
             this.PerformLayout();

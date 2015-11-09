@@ -46,8 +46,16 @@
             this.chooseFileManuallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.showEmptyRowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.filterApplyButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.filterTextBox = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.countLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -66,10 +74,10 @@
             this.filepath,
             this.statusColumn});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(685, 262);
+            this.dataGridView1.Size = new System.Drawing.Size(679, 210);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseUp);
@@ -186,13 +194,76 @@
             this.showEmptyRowsToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.showEmptyRowsToolStripMenuItem.Text = "Show empty rows";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.countLabel);
+            this.groupBox1.Controls.Add(this.filterApplyButton);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.filterTextBox);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.MaximumSize = new System.Drawing.Size(0, 35);
+            this.groupBox1.MinimumSize = new System.Drawing.Size(0, 35);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(685, 35);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            // 
+            // filterApplyButton
+            // 
+            this.filterApplyButton.Location = new System.Drawing.Point(150, 7);
+            this.filterApplyButton.Name = "filterApplyButton";
+            this.filterApplyButton.Size = new System.Drawing.Size(75, 23);
+            this.filterApplyButton.TabIndex = 2;
+            this.filterApplyButton.Text = "Apply";
+            this.filterApplyButton.UseVisualStyleBackColor = true;
+            this.filterApplyButton.Click += new System.EventHandler(this.filterApplyButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Filter:";
+            // 
+            // filterTextBox
+            // 
+            this.filterTextBox.AcceptsReturn = true;
+            this.filterTextBox.Location = new System.Drawing.Point(44, 9);
+            this.filterTextBox.Name = "filterTextBox";
+            this.filterTextBox.Size = new System.Drawing.Size(100, 20);
+            this.filterTextBox.TabIndex = 0;
+            this.filterTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.filterTextBox_KeyPress);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 35);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(685, 229);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            // 
+            // countLabel
+            // 
+            this.countLabel.AutoSize = true;
+            this.countLabel.Location = new System.Drawing.Point(232, 12);
+            this.countLabel.Name = "countLabel";
+            this.countLabel.Size = new System.Drawing.Size(47, 13);
+            this.countLabel.TabIndex = 3;
+            this.countLabel.Text = "Count: 0";
+            // 
             // databaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(685, 262);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(685, 264);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(150, 50);
             this.Name = "databaseForm";
@@ -202,6 +273,9 @@
             this.Shown += new System.EventHandler(this.databaseForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -224,5 +298,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn statusColumn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem showEmptyRowsToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox filterTextBox;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button filterApplyButton;
+        private System.Windows.Forms.Label countLabel;
     }
 }
