@@ -1,4 +1,10 @@
-﻿SwProjectInterface - A workflow helper for SolidWorks. Integrates project’s part library with SolidWorks API.
+# Info from the future
+
+This, I believe, is first "serious" piece of C# code that I've ever wrote, back when programming concepts were mostly alien to me. It is not pretty, it is not right, and it probably has a lot of bugs. But hey, I know at least one SolidWorks engineer that uses this software in his daily work. Anyway, as of today I am archiving this repo, filled with hope that one day my schedule and motivation will allow me to reimplement this in a proper way - aka SWPI2. Cheers.
+
+
+
+# SwProjectInterface - A workflow helper for SolidWorks. Integrates project’s part library with SolidWorks API.
 
 Requires:
 
